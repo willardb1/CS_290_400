@@ -1,0 +1,76 @@
+/*Author: Brody Willard */
+/*Date: 10/9/19 */
+/*Description: CSS style file for CS 290 Assignment 2*/
+
+table {/*selects all tables*/
+    border: 1px solid #000;/*sets border to black with a width of 1 px*/
+    table-layout: fixed;/*column widths are set by width of table*/
+    width: 100%;/*sets width to 100% width of the page*/
+}
+
+.top-row {/*selects top row class*/
+    font-weight: bold;/*sets font to bold*/
+    border: 1px solid #000;/*sets border of top row to black with 1 px width*/
+}
+
+.first-col {/*selects first col class*/
+    font-style: italic;/*sets font to italic*/
+}
+
+th {/*selects all table headers objects*/
+    border: 1px solid #000;/*sets border to black with 1px width*/
+}
+
+td {/*selects all table data cell*/
+    word-wrap: normal;/*allows data to "text warp" in cells*/
+    text-align: center;/*aligns text to center*/
+    border: 1px solid #000;/*sets border to balck with 1px width*/
+}
+
+    td:not(#footer1):nth-child(2n+1) {/*selects every other col except the one with id footer 1*/
+        color: rgb(177, 11, 11);/*sets color to red*/
+    }
+
+tr:nth-child(even) {/*selects even rows*/
+    background-color: rgb(128, 200, 75);/*sets background to green*/
+}
+
+tr:not(.footer):not(.top-row):nth-child(2n+1) {/*selects every odd row except the footer and top row*/
+    background-color: rgb(85, 104, 255);/*sets background to blue*/
+}
+
+.outer-content {/*selects "outer-content" div*/
+    width: 75%;/*sets div width to 75% of page*/
+    text-align: center;/*centers text*/
+    background-color: pink;/*sets background color to pink*/
+    padding: 20px 0px 20px 0px;/*pads top and bottom of div by 20px*/
+    float: left;/*sets div to left side of the page*/
+    margin-top: 20px/*sets margin above object to 20px*/
+}
+
+   .outer-content .inner-content {/*selects "inner-content" div as child of "outer-content" div*/
+        display: inline-block;/*sets block to be centered inline*/
+        width: 75%;/*sets width to 75% of parent object*/
+        background-color: deepskyblue;/*sets color to deep sky blue*/
+        text-align: center;/*centers text */
+    }
+
+.form-struct {/*selects the form structure class*/
+    clear: both;/*ignores float*/
+    width: 100%;/*sets width of object to 100% of page */
+}
+
+.form_input {/*selects the form input class*/
+    border: 1px solid #000;/*sets border to black with a 1px width*/
+    padding: 5px 0px 5px 5px;/*padds the form by 5px on the top bottom and right */
+    margin: 10px 5px 10px 5px;/*adds a margin to the form 10px on top and bottom, 5px on left and right*/
+}
+
+#radio_prompt {/*selects the radio prompt id*/
+    vertical-align: top;/*align text to top*/
+    margin: 0px 0px 5px 0px;/*adds a 5px margin to bottom of prompt*/
+}
+
+.candy_options {/*selects the candy class*/
+    margin: 0px 0px 5px 0px;/*sets margin to 5px on the bottom*/
+}
