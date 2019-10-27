@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!--Author: Brody Willard-->
+<!--Date: 10/9/19-->
+<!--Description: CS 290, Assignment 2: HTML/CSS, HTML file -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Assignment 2: HTML/CSS</title><!--sets title of page-->
+    <link rel="stylesheet" href="style.css" /><!--pulls styling from css file-->
+</head>
+<body>
+    <table> <!--Creates table-->
+        <caption>Common Forms of Spacecraft Propulsion and thier Performace</caption> <!--sets caption-->
+        <tr class="top-row"><!--creates first row-->
+            <th> </th><!--keeps first cell blank-->
+            <th> Propellant </th>
+            <th> Energy </th>
+            <th> Vacuum Isp (Sec) </th>
+            <th> Thurst Range (N) </th>
+            <th> Ave Bulk Density (g/cm<sup>3</sup>) </th>
+        </tr>
+
+        <tr><!--creates next row-->
+            <th class="first-col"> Cold Gas </th><!--applies first col style to element-->
+            <td> Freon, Helium</td>
+            <td> High Pressure</td>
+            <td> 50-75</td>
+            <td> 0.05-200</td>
+            <td> 0.28-0.96</td>
+        </tr>
+
+        <tr><!--creates next row-->
+            <th class="first-col"> Solid </th>
+            <td> Org Polymer + NH<sub>4</sub>ClO<sub>4</sub> + powder Al</td>
+            <td> Chemical</td>
+            <td> 280-300</td>
+            <td> 50 - 5x10<sup>8</sup></td>
+            <td> 1.80</td>
+        </tr>
+
+        <tr><!--creates next row-->
+            <th class=" first-col"> Bipropellant </th>
+            <td> N<sub>2</sub>O<sub>4</sub> and MMH</td>
+            <td> Chemical</td>
+            <td> 300-340</td>
+            <td> 5-5x10<sup>8</sup></td>
+            <td> 0.86-1.43</td>
+        </tr>
+
+        <tr><!--creates next row-->
+            <th class="first-col"> Hybrid </th>
+            <td> O<sub>2</sub> and rubber</td>
+            <td> Chemical</td>
+            <td> 225</td>
+            <td> 225-3.5x10<sup>5</sup></td>
+            <td> 1.14-1.5</td>
+        </tr>
+
+        <tr><!--creates next row-->
+            <th class="first-col"> Ion </th>
+            <td> Hg/A/Xe/Cs</td>
+            <td> Electrostatic</td>
+            <td> 2000-6000</td>
+            <td> 5x10<sup>-6</sup>-0.5</td>
+            <td> 13.5/0.44/2.73/1.87</td>
+        </tr>
+
+        <tfoot><!--createes footer-->
+            <tr class="footer"> <!--creates row-->
+                <td id="footer1" colspan="2"> <em>*only a few examples of propellant are listed above </em> </td><!--fills first footer cell, sets width to 2 col-->
+                <td colspan="4"> <em>*range of provided examples is listed above</em></td><!--fills second footer cell, sets width to 4 col-->
+            </tr>
+        </tfoot>
+    </table>
+
+    <h3>Languages used in WebDevelopment</h3> <!--header for list-->
+    <ul><!--creates list -->
+        <li> HTML</li><!--addes entity to list-->
+        <li> CSS</li>
+        <li> JavaScript</li>
+    </ul>
+
+    <div class="outer-content"><!--create outer content div-->
+        <div class="inner-content"><!--create inner content div-->
+            <p>Inner Content Text</p><!--create paragraph of text-->
+        </div>
+    </div>
+
+    <form action="http://web.engr.oregonstate.edu/~zhangluy/tools/class-content/form_tests/check_request.php" method="get" class=" form-struct"> <!--creates get form-->
+        <fieldset>
+            <legend>Some GET Data</legend><!--adds legend to form-->
+            <div class="form_input"><!--create div element for text input-->
+                <label for="text_input"> Text here: </label>
+                <input type="text" name="text_input" id="text_input" required />
+            </div>
+
+            <div class="form_input"><!--creates div element for number input-->
+                <label for="numerical_input"> Number here: </label>
+                <input type="number" name="numerical_input" id="numerical_input" required />
+            </div>
+
+            <div class="form_input"><!--creates div element for password input-->
+                <label for="password_input"> Password here: </label>
+                <input type="password" name="password_input" id="password_input" required />
+            </div>
+
+            <div class="form_input"><!--creates div element for the radio input-->
+                <p id="radio_prompt">Select Between:</p><!--creates question prompt-->
+                <div class="candy_options"><!--creates div for first candy-->
+                    <input type="radio" id="Snickers" name="candy" value="Snickers" />
+                    <label for="Snickers">Snickers</label>
+                </div>
+
+                <div class="candy_options"><!--creates div for second candy-->
+                    <input type="radio" id="Skittles" name="candy" value="Skittles" />
+                    <label for="Skittles">Skittles</label>
+                </div>
+
+                <div class="candy_options"><!--creates div for third candy -->
+                    <input type="radio" id="Mentos" name="candy" value="Mentos" />
+                    <label for="Mentos">Mentos</label>
+                </div>
+
+                <div><!--creates submit button-->
+                    <button type="submit"> Submit</button>
+                </div>
+            </div>
+
+
+        </fieldset>
+    </form>
+
+    <br />
+    <form action="http://web.engr.oregonstate.edu/~zhangluy/tools/class-content/form_tests/check_request.php" method="post" class=" form-struct"> <!--creates post form-->
+        <fieldset>
+            <legend>Some Post Data</legend><!--creates legend for form-->
+            <div class="form_input"><!--create div for text input-->
+                <label for="text_input"> Text here: </label>
+                <input type="text" name="text_input" id="text_input" required />
+            </div>
+
+            <div class="form_input">
+                <label for="numerical_input"> Number here: </label><!--creates div for number input-->
+                <input type="number" name="numerical_input" id="numerical_input" required />
+            </div>
+
+            <div class="form_input"><!--creates div for password input -->
+                <label for="password_input"> Password here: </label>
+                <input type="password" name="password_input" id="password_input" required />
+            </div>
+
+            <div class="form_input"><!--creates div for radio input-->
+                <p id="radio_prompt">Select Between:</p><!--creates prompt-->
+                <div class="candy_options"><!--creates div for first candy -->
+                    <input type="radio" id="Snickers" name="candy" value="Snickers" />
+                    <label for="Snickers">Snickers</label>
+                </div>
+
+                <div class="candy_options"><!--creates div for second candy-->
+                    <input type="radio" id="Skittles" name="candy" value="Skittles" />
+                    <label for="Skittles">Skittles</label>
+                </div>
+
+                <div class="candy_options"><!--creates div for third candy-->
+                    <input type="radio" id="Mentos" name="candy" value="Mentos" />
+                    <label for="Mentos">Mentos</label>
+                </div>
+
+                <div><!--creates submit button-->
+                    <button type="submit"> Submit</button>
+                </div>
+            </div>
+
+
+        </fieldset>
+    </form>
+
+</body>
+</html>
