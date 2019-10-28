@@ -6,7 +6,7 @@ function buildList(list) {
     var result = [];
     for (var i = 0; i < list.length; i++) {
        var item = 'item' + list[i];
-       result.push(function (j) { alert(item + ' ' + list[j]) }(i));//passes the value of i into the function so that it can be used in alert function
+       result.push(function (id) { alert(item + ' ' + list[id]) }(i));//passes the value of i into the function so that it can be used in alert function
     }
     return result;
 }
