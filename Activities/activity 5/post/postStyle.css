@@ -1,0 +1,38 @@
+/********************************************************
+*  Author: Brody Willard
+*  Date: 11/8/19
+*  Description: CSS file for part two of AJAX activity
+********************************************************/
+
+body{
+    font-family: Arial;/*set font to arial*/
+}
+
+form {
+    height: 100px;/*set height of form*/
+    width: 400px;/*set width of form*/
+    margin-bottom: 10px;/*adds margin to bottom of form*/
+}
+
+fieldset{
+    height: 80px;/*set height fieldset*/
+
+}
+
+#userIn{
+    text-align: center;/*centers text in fieldset*/
+    margin-top: 0;/*removes margin from top of text in fieldset*/
+
+}
+
+#userIn p{
+    margin-top: 0;/*recomes margin from top of paragraph in fieldset*/
+}
+
+legend{
+    font-weight: bold;/*sets legend to bold*/
+}
+
+#outCap{
+    font-weight: bold;/*sets output caption to bold */
+}
