@@ -1,0 +1,82 @@
+<!---------------------------------
+Author: Brody Willard
+Date: 11/8/19
+Description: html file for first
+part of AJAX activity
+----------------------------------->
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Open Weather Map </title>
+    <link rel="stylesheet" href="weatherStyle.css" /><!--import css file-->
+</head>
+<body>
+    <form>
+        <fieldset>
+            <legend>Weather</legend><!--adds legend to form-->
+            <div class="form_input">
+                <!--creates div element for the radio input-->
+                <p id="radio_prompt">Select a unit type:</p><!--creates question prompt-->
+                <div class="units">
+                    <!--creates div for metric units-->
+                    <input type="radio" id="metric" name="unit" value="metric" /><!--provide button to select metric units-->
+                    <label for="metric">Metric</label><!--adds label to button-->
+                </div>
+
+                <div class="units">
+                    <!--creates div for imperial units-->
+                    <input type="radio" id="imperial" name="unit" value="imperial" /><!--provide button to select imperial units-->
+                    <label for="imperial">Imperial</label><!--adds label to button-->
+                </div>
+            </div>
+
+
+            <p>Please provide Country Code and City or Country Code and Zip Code:</p><!--prompt user for inputs-->
+            <label for=" COUNTRY_CODE">Country Code:</label><!--add label for text input-->
+            <input type="text" name="COUNTRY_CODE" id="COUNTRY_CODE" /><!--adds text box for inputs-->
+            <label for="city">City:</label><!--add label for text input-->
+            <input type="text" name="city" id="city" /><!--adds text box for inputs-->
+            <input type="button" value="submit" id="submitInfo" /><!--adds submissin button-->
+
+            <label for="city">Zip Code:</label><!--add label for text input-->
+            <input type="text" name="zip" id="zip" /><!--adds text box for inputs-->
+            <input type="button" value="submit" id="submitInfo2" /><!--adds submissin button-->
+
+        </fieldset>
+    </form>
+    <div id="results">
+        <h2>Weather Results</h2><!--adds header to result section-->
+       
+        <ul>
+            <li><span>Location: </span><span id="locationOut"></span></li><!--outputs location-->
+            <li><span>Time Recorded: </span><span id="time"></span></li><!--outputs time of recording-->
+            <li><span>Forcast: </span><span id="forecast"></span></li><!--outputs forecast-->
+            <li><span>Details: </span><span id="forecastDetails"></span></li><!--outputs detailed forecast-->
+            <li><span>Temp: </span><span id="temp"></span></li><!--outputs temp-->
+            <li><span>Temp Min: </span><span id="tempMin"></span></li><!--outputs temp min-->
+            <li><span>Temp Max: </span><span id="tempMax"></span></li><!--outputs temp max-->
+            <li><span>Pressure: </span><span id="pressure"></span></li><!--outputs atmospheric pressure-->
+            <li><span>Humidity: </span><span id="humidity"></span></li><!--outputs humidity-->
+            <li><span>Wind Speed: </span><span id="wind"></span></li><!--outputs wind seed-->
+
+        </ul>
+    </div>
+    <br />
+    <h2>Country Codes</h2><!--header for country code section-->
+    <div id="codes">
+        <table id="codeTable"><!--creates table for country codes-->
+
+            <tr class="topRow"><!--adds top row of table-->
+                <th>Country</th>
+                <th>Code</th>
+            </tr>
+
+        </table>
+    </div>
+    <script src="weatherScript.js"></script><!--imports javascript file for use on site-->
+
+</body>
+</html>
