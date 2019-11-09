@@ -1,0 +1,57 @@
+/********************************************************
+*  Author: Brody Willard
+*  Date: 11/8/19
+*  Description: CSS file for part one of AJAX activity
+********************************************************/
+body
+{
+    background-color: rgb(187, 229, 253);/*sets background color of body*/
+    font-family: Arial;/*sets font to arial*/
+}
+
+legend {
+    font-size: 30px;/*sets font size of legend*/
+    font-weight: bold;/*bolds legend*/
+    text-decoration: underline;/*underlines legend*/
+    background-color: rgb(190, 215, 247);/*sets backgorund color of legend*/
+    padding-top:0;/*removes padding from top of legend*/
+    border-radius: 10px;/*rounds the corners of the legend*/
+}
+
+#results{
+    background-color:rgb(190, 215, 247);/*sets background color of results section*/
+    padding-bottom: 1px;/*adds padding to bottom of results*/
+    margin: 5px;/*adds 5px margin to results*/
+    border-radius: 10px;/*rounds corners of results section*/
+}
+
+h2 {
+    background-color: rgb(190, 215, 247);/*sets color of headers*/
+    padding-top: 5px;/*pads top of header*/
+    padding-bottom: 5px; /*pads bottom of header*/
+    text-decoration: underline;/*underlines header*/
+    border-radius: 10px;/*rounds corner of header*/
+    width: 300px;/*sets header width*/
+    text-align: center;/*centers the header text*/
+}
+
+label{
+    font-weight: bold;/*bolds label*/
+}
+
+p{
+    font-weight: bold;/*bolds paragraphs*/
+}
+
+th{
+    text-decoration:underline;/*underlines table headers*/
+    font-weight: bold;/*bolds table headers*/
+}
+
+fieldset {
+    background-color: rgb(190, 215, 247);/*sets background color of fieldset*/
+}
+
+li{
+    font-size: 20px;/*sets font size of list*/
+}
