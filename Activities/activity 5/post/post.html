@@ -1,0 +1,34 @@
+<!------------------------------
+Author: Brody Willard
+Date: 11/8/19
+Description: html file for first
+part of AJAX activity
+-------------------------------->
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>HttpBin</title>
+    <link rel="stylesheet" href="postStyle.css" /><!--imports css file-->
+</head>
+<body>
+    <form>
+        <fieldset>
+            <legend>Input</legend><!--adds legend to form-->
+            <div id="userIn">
+                <p>Please provide an input: </p><!--prompt user for input-->
+                <input type="text" name="input" id="input" /><!--provide text box for input-->
+                <input type="button" value="submit" id="submitInfo" /><!--submit button for input-->
+            </div>
+        </fieldset>
+    </form>
+
+    <div>
+        <span id="outCap">Output: </span><span id="output"></span><!--output of form submission-->
+    </div>
+
+    <script src="postScript.js"></script><!--imports javascript file for use on site-->
+</body>
+</html>
