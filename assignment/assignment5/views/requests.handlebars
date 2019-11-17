@@ -1,0 +1,15 @@
+<!--Author: Brody Willard-->
+<!--Date:11/17/19-->
+<!--Description: request handlebar page for web application-->
+
+<h1>{{type}} Request Received</h1><!--imports the type of request and outputs a header-->
+
+<div>
+    <label>Parameters</label><!--labels list-->
+    <ul>
+        <!--creates unordered list-->
+        {{#each data}}<!--pulls each parameter-->
+        <li>{{this.name}}:{{this.value}}</li><!--imports name and value of each parameter into a list-->
+        {{/each}}
+    </ul>
+</div>
