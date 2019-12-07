@@ -1,0 +1,371 @@
+<!--Author: Brody Willard-->
+<!--Date:12/6/19-->
+<!--Description: home handlebar page for web application-->
+<!DOCTYPE html>
+
+<h1 style="text-decoration:underline; margin-top: 0">Workout Checker</h1><!--adds header for page-->
+
+<form style="padding-top:15px;">
+    <fieldset style=" background-color:whitesmoke">
+        <legend style=" background-color:whitesmoke; border-radius: 10px; padding-top: 5px; font-size: 22px; width: 150px; padding-left:25px; text-decoration: underline">Workout input</legend><!--adds legend to form-->
+        <div class="form_input">
+            <p>Add to workout list:</p>
+            <label for="name">Name:</label><!--add label for text input-->
+            <input type="text" name="name" id="nameB" /><!--adds text box for inputs-->
+
+            <label for="name" style="margin-left:30px">Reps:</label><!--add label for text input-->
+            <input type="text" name="reps" id="repsB" /><!--adds text box for inputs-->
+
+            <label for="name" style="margin-left:30px">Weight:</label><!--add label for text input-->
+            <input type="text" name="weight" id="weightB" /><!--adds text box for inputs-->
+
+            <label for="name" style="margin-left:30px">Date:</label><!--add label for text input-->
+            <input type="text" name="date" id="dateB" /><!--adds text box for inputs-->
+
+            <label for="name" style="margin-left:30px">Unit:</label><!--add label for text input-->
+            <input type="text" name="unit" id="unitB" style="margin-right:15px" /><!--adds text box for inputs-->
+
+            <input type="button" value="submit" id="submitInfo" onclick="submitNew()" /><!--adds submissin button-->
+        </div>
+        <p style="font-size:12px; margin-top: 25px">
+            <!--adds subtext for form-->
+            <span>*Name and Date required</span>
+            <span style="margin-left:25px">*Date format: mm-dd-yyyy </span>
+            <span style="margin-left:25px"> *Units: kg or lbs(default)</span>
+            <span style="margin-left:25px">*Default reps and weight = 0</span>
+            <span style="margin-left:650px"><span style="font-weight:bold; font-size:14px">Reset Table:</span><input type="button" value="Reset" id="resetTable" onclick="resetTableB()" style="margin-left:20px" /><!--adds reset button--></span>
+        </p>
+
+    </fieldset>
+</form>
+
+<div id="statContainer">
+    <p>Status: <span id="T_F"> </span>   </p>
+    <ul style="margin: 2px 0px 2px 2px">
+        <li style="font-size: 14px">If status reads true, pressing button will execute http request/database query</li>
+        <li style="font-size: 14px">If status is false, page is waiting for response from http request(be patient)</li>
+        <li style="font-size: 10px">If it takes more then 10s to switch status...you probably broke it. id recommend refreshing the page</li>
+    </ul>
+</div>
+<script>
+    console.log('status set to true')
+    document.getElementById('T_F').textContent = 'true';//sets T_F to true
+    document.getElementById('T_F').value = true;//sets T_F to true
+</script>
+
+
+
+<h2 style="text-decoration:underline">Workout list:</h2>
+
+
+
+<table id="WorkOutTable">
+    <thead>
+        <tr>
+            <!--sets headers for cells -->
+            <th style="width:200px; height: 20px; text-decoration: underline; text-align:center">Name</th>
+            <th style="width:100px; height: 20px; text-decoration: underline; text-align:center">Reps</th>
+            <th style="width:100px; height: 20px; text-decoration: underline; text-align:center">Weight</th>
+            <th style="width:600px; height: 20px; text-decoration: underline; text-align:center">Date</th>
+            <th style="width:100px; height: 20px; text-decoration: underline; text-align:center">Unit</th>
+            <th style="width:100px; height: 20px; text-decoration: underline; text-align:center">Edit</th>
+            <th style="width:100px; height: 20px; text-decoration: underline; text-align:center">Delete</th>
+        </tr>
+    </thead>
+
+    <tbody id="tableBody">
+        <!--body for table contents -->
+        {{#each data}}<!--creates runs for each data elemnet -->
+        <tr id="{{this.id}}">
+            <!--set row id-->
+            <td style="width:100px; height: 50px; border: 1px solid black; text-align:center">{{this.name}}</td><!--creates cell with name -->
+            <td style="width:100px; height: 50px; border: 1px solid black; text-align:center">{{this.reps}}</td><!--creates cell with reps-->
+            <td style="width:100px; height: 50px; border: 1px solid black; text-align:center">{{this.weight}}</td><!--creates cell with weight-->
+            <td style="width:600px; height: 50px; border: 1px solid black; text-align:center">{{this.date}}</td><!--creates cell with date-->
+            <td style="width:100px; height: 50px; border: 1px solid black; text-align:center">{{this.unit}}</td><!--creates cell with unit-->
+            <td style="width:100px; height: 50px; border: 1px solid black; text-align:center">
+                <!--creates cell-->
+                <form>
+                    <!--creates form -->
+                    <input type="hidden" value="{{this.id}}" /><!--creates input with value of id-->
+                    <input type="button" value="edit" id="editInfo" onclick="editRow({{this.id}})" /><!--creates button with editRow funciton-->
+                </form>
+            </td>
+
+            <td style="width:100px; height: 50px; border: 1px solid black; text-align:center">
+                <!--creates cell-->
+                <form>
+                    <!--creates form -->
+                    <input type="hidden" value="{{this.id}}" /><!--creates input with value of id -->
+                    <input type="button" value="delete" id="deleteInfo" onclick="deleteRow({{this.id}})" /><!--creates button with deleteRow function-->
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+
+</table>
+
+
+
+
+
+
+
+<script>
+
+
+    function submitNew() {
+
+        if (document.getElementById('nameB').value.length != 0 && document.getElementById('dateB').value.length != 0 && document.getElementById('T_F').value == true) {
+            console.log('status update to false')
+
+            document.getElementById('T_F').textContent = 'false';//set T_F to false
+            document.getElementById('T_F').value = false;//set T_F to false
+
+            var req = new XMLHttpRequest();//initiate new XML request
+            var info = { name: null, reps: null, weight: null, date: null, unit: null };//creates info varaible
+
+            info.name = document.getElementById('nameB').value;//sets name to provided value
+
+            info.reps = document.getElementById('repsB').value;//sets reps to provided value
+            if (info.reps.length == 0) {//checks if reps has a value
+                info.reps = 0;//sets value to 0 if not provided
+            }
+
+
+            info.weight = document.getElementById('weightB').value;//sets weight to provided value
+            if (info.weight.length == 0) {//checks if weight has a value
+                info.weight = 0;//sets value to 0 if not provided
+            }
+
+
+            info.date = document.getElementById('dateB').value;//sets value of date to provided
+            var ddmmyyyy = info.date;//pulls date to temp variable
+            var month = ddmmyyyy.substring(0, 2);//pulls provided month
+            var day = ddmmyyyy.substring(3, 5);//pulls provided day
+            var year = ddmmyyyy.substring(6, 10);//pulls provided year
+
+            var yyyymmdd = year + "-" + month + "-" + day//restructures date
+            info.date = yyyymmdd;//sets date to restructured date
+
+
+            if (document.getElementById('unitB').value != 'lbs' && document.getElementById('unitB').value != 'kg') {//checks if value is not lbs or kg
+                info.unit = 'lbs';//default unit
+            }
+            else {
+                info.unit = document.getElementById('unitB').value;//sets value of unit to provided
+            }
+
+            var payload = "/?name=" + info.name + "&reps=" + info.reps + "&weight=" + info.weight + "&date=" + info.date + "&unit=" + info.unit;//buidls payload
+
+            req.open('GET', payload, true);//opens location
+            req.send();//sends request
+
+            var response;
+            req.onreadystatechange = function () {//runs on state change
+                if (req.readyState === XMLHttpRequest.DONE && req.status >= 200 && req.status < 300) {
+                    response = req.responseText;//pulls text response from req
+                    console.log(response);
+                    response = JSON.parse(response);//pulls response from sight and parses
+                    console.log(response.data);
+                    response = response.last;//pulls last from req response
+                    console.log(response);
+                    addToTable(response);//runs addToTable with req response
+                    console.log('addToTable complete');
+                    console.log('status update to true')
+                    document.getElementById('T_F').textContent = 'true';//sets T_F to true
+                    document.getElementById('T_F').value = true;//sets T_F to true
+                }
+                else {
+                    console.log('status update to true')
+                    console.log('failed to update');
+                    document.getElementById('T_F').textContent = 'true';//sets T_F to true
+                    document.getElementById('T_F').value = true;//sets T_F to true
+                }
+            }
+
+        }
+        else {
+            console.log('invalid data');
+        }
+    }
+
+
+
+    function resetTableB() {
+
+        if (document.getElementById('T_F').value == true) {
+            document.getElementById('T_F').textContent = 'false';//set T_F to false
+            document.getElementById('T_F').value = false;//set T_F to false
+            var req = new XMLHttpRequest();//initiate new XML request
+            var payload = "/resetTable";//sets payload of req
+            req.open('GET', payload, true);//opens location
+            req.send();//sends request
+
+            req.onreadystatechange = function () {//runs on state change
+                if (req.readyState === XMLHttpRequest.DONE && req.status >= 200 && req.status < 300) {
+                    //window.open("http://flip3.engr.oregonstate.edu:49913/", "_self");
+                    var tableB = document.getElementById('tableBody');//pulls table body for reference
+                    var child = tableB.firstElementChild;//selects first child of table body (first row)
+                    while (child) {//runs while there is still a child selected
+                        child.remove();//removes child(i.e. row)
+                        child = tableB.firstElementChild;//selects next child of table body
+                    }
+                    console.log('status update to true')
+                    document.getElementById('T_F').textContent = 'true';//sets T_F to true
+                    document.getElementById('T_F').value = true;//sets T_F to true
+                }
+            }
+        }
+
+
+    }
+
+    function deleteRow(id) {
+
+        if (document.getElementById('T_F').value == true) {
+            document.getElementById('T_F').textContent = 'false';//set T_F to false
+            document.getElementById('T_F').value = false;//set T_F to false
+            var req = new XMLHttpRequest();//initiate new XML request
+            var info = { id: null };//creates info variable
+            info.id = id;//sets id
+
+            var payload = "/delete?id=" + info.id;//builds payload for req
+            req.open('GET', payload, true);//opens location
+            req.send();//sends request
+
+            req.onreadystatechange = function () {//runs on state change
+                if (req.readyState === XMLHttpRequest.DONE && req.status >= 200 && req.status < 300) {
+                    //window.open("http://flip3.engr.oregonstate.edu:49913/", "_self");
+
+                    var row = document.getElementById(id);//pulls row for reference
+                    row.remove();//deletes row
+                    document.getElementById('T_F').textContent = 'true';//sets T_F to true
+                    document.getElementById('T_F').value = true;//sets T_F to true
+                }
+            }
+        }
+    }
+
+    function editRow(id) {
+        if (document.getElementById('T_F').value == true) {
+            document.getElementById('T_F').textContent = 'false';//set T_F to false
+            document.getElementById('T_F').value = false;//set T_F to false
+            var req = new XMLHttpRequest();//initiate new XML request
+            var info = { id: null };//creates info variable
+            info.id = id;//sets id
+
+            var payload = "/edit?id=" + info.id;//builds payload for req
+            req.open('GET', payload, true);//opens location
+            req.send();//sends request
+
+            req.onreadystatechange = function () {//runs on state change
+                if (req.readyState === XMLHttpRequest.DONE && req.status >= 200 && req.status < 300) {
+                    window.open("http://flip3.engr.oregonstate.edu:49913" + payload, "_self");//opens edit window
+                }
+            }
+        }
+    }
+
+
+    function addToTable(response) {
+        var tableB = document.getElementById('tableBody');//pulls table body for reference
+        console.log(tableB);
+        var row = document.createElement('tr');//creates new row
+        row.id = response.id;//sets id of row
+        tableB.appendChild(row);//adds row to table body
+        console.log(row);
+        for (var i = 0; i < 7; i++) {
+            //console.log("for run:" + i);
+            var cell = document.createElement('td');//creates new cell
+            cell.style.width = "100px"; //sets cell width
+            if (i == 0) {
+                var cellText = document.createTextNode(response.name);//sets cell text to name
+                cell.appendChild(cellText);//adds text to cell
+                cell.style.width = "200px";//sets cell width
+            }
+            else if (i == 1) {
+                var cellText = document.createTextNode(response.reps);//creates text node with reps
+                cell.appendChild(cellText);//appends text to cell
+            }
+            else if (i == 2) {
+                var cellText = document.createTextNode(response.weight);//creates text node with weight
+                cell.appendChild(cellText);//appends text to cell
+            }
+            else if (i == 3) {
+                var FullDate = response.date;//pulls response date
+                console.log(FullDate);
+                var year = FullDate.substring(0, 4);//pulls date year
+                var month = FullDate.substring(5, 7);//pull date month
+                var day = FullDate.substring(8, 10);//pull date day
+                var hour = FullDate.substring(11, 13);//pull date hour
+                var minute = FullDate.substring(14, 16);//pull date minute
+                var sec = FullDate.substring(17, 19);//pull date sec
+                var milSec = FullDate.substring(20, 23);//pull date milSec
+
+                var newDate = new Date();//creates new date
+                newDate.setFullYear(year);//sets year of date
+                newDate.setMonth(month);//sets month of date
+                newDate.setDate(day);//sets day of date
+                newDate.setHours(0);//sets hour of date
+                newDate.setMinutes(0);//sets min of date
+                newDate.setSeconds(0);//sets sec of date
+                newDate.setMilliseconds(0);//sets milSec of date
+                console.log(newDate);
+
+                var cellText = document.createTextNode(newDate);//sets cell text to new date
+                cell.appendChild(cellText);//appends text to cell
+                cell.style.width = "600px";//sets cell width
+            }
+            else if (i == 4) {
+                var cellText = document.createTextNode(response.unit);//sets cell text to provided unit
+                cell.appendChild(cellText);//appends text to cell
+            }
+            else if (i == 5) {
+                var formI = document.createElement('form');//creates form
+                var hiddenI = document.createElement('input');//create input
+                hiddenI.type = 'hidden';//sets input type to hidden
+                hiddenI.value = response.id;//sets id of input
+                formI.appendChild(hiddenI);//appends input to form
+
+
+                var editI = document.createElement('input');//create input
+                editI.type = 'button';//sets input type to button
+                editI.value = 'edit';//sets value of button
+                editI.id = 'editInfo';//set id of button
+
+                editI.onclick = function () { editRow(response.id) };//add onclick function to button
+                formI.appendChild(editI);//append button to form
+                cell.appendChild(formI);//appends form to cell
+            }
+            else if (i == 6) {
+                var formI = document.createElement('form');//creat form
+                var hiddenI = document.createElement('input');//create input
+                hiddenI.type = 'hidden';//set input to hidden
+                hiddenI.value = response.id;//set input id
+                formI.appendChild(hiddenI);//append input to form
+
+                var deleteI = document.createElement('input');//create input
+                deleteI.type = 'button';//set input type to button
+                deleteI.value = 'delete';//set value of button
+                deleteI.id = 'deleteInfo';//set id of button
+
+                deleteI.onclick = function () { deleteRow(response.id) };//add onclick function to button
+                formI.appendChild(deleteI);//append button to form
+                cell.appendChild(formI);//append form to cell
+            }
+
+            cell.style.height = "50px";//set cell height to 50px
+            cell.style.border = "1px solid black";//set cell border
+            cell.style.textAlign = "center";//centers text in cell
+            row.appendChild(cell);//append cell to row
+        }
+        console.log('row complete');
+        console.log(row);
+        console.log('added row to table');
+
+    }
+</script>
+
+
