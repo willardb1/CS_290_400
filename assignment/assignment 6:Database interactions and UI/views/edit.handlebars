@@ -1,0 +1,107 @@
+<!--Author: Brody Willard-->
+<!--Date:12/6/19-->
+<!--Description: edit handlebar page for web application-->
+<!DOCTYPE html>
+
+<h1 style="text-decoration:underline; margin-top: 0">Edit Workout</h1>
+
+<form>
+    <fieldset style=" background-color:whitesmoke">
+        <legend style=" background-color:whitesmoke; border-radius: 10px; padding-top: 5px; font-size: 22px; width: 150px; padding-left:25px; text-decoration: underline">Workout input</legend><!--adds legend to form-->
+        <div class="form_input">
+            {{#each data}}
+            <p>Edit Workout Item #{{this.id}}</p>
+            <label for="name">Name:</label><!--add label for text input-->
+            <input type="text" name="name" id="nameB" value="{{this.name}}" style="width:100px" /><!--adds text box for inputs-->
+
+            <label for="name">Reps:</label><!--add label for text input-->
+            <input type="text" name="reps" id="repsB" value="{{this.reps}}" style="width:100px" /><!--adds text box for inputs-->
+
+            <label for="name">Weight:</label><!--add label for text input-->
+            <input type="text" name="weight" id="weightB" value="{{this.weight}}" style="width:100px" /><!--adds text box for inputs-->
+
+            <label for="name">Date:</label><!--add label for text input-->
+            <input type="hidden" id="datePlaceHolder" value="{{this.date}}" />
+            <input type="text" name="date" id="dateB" style="width:300px" /><!--adds text box for inputs-->
+            <script>
+                var monthsA = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                var monthN = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+
+                var yyyymmdd = document.getElementById('datePlaceHolder').value;//sets temp variable to date
+                yyyymmdd = yyyymmdd.substring(4, 15);//pulls relevent text
+
+                var year = yyyymmdd.substring(7, 11);//pulls year
+
+                var day = yyyymmdd.substring(4, 6);//pulls day
+
+                var month = yyyymmdd.substring(0, 3);//pulls month
+
+                var mIdx = monthsA.indexOf(month);//find month idx
+
+                month = monthN[mIdx];//pulls month numerical value
+
+                var mmddyyyy = month + "-" + day + "-" + year;//restructures date
+                document.getElementById('dateB').value = mmddyyyy;//sets date to restructured value
+            </script>
+
+
+            <label for="name">Unit:</label><!--add label for text input-->
+            <input type="text" name="unit" id="unitB" value="{{this.unit}}" style="width:100px" /><!--adds text box for inputs-->
+
+            <input type="button" value="submit" id="submitInfo" onclick="editButton({{this.id}})" /><!--adds submissin button-->
+            {{/each}}
+            <p style="font-size:12px; margin-top: 25px">
+                <!--subtext for form-->
+                <span>*Name and Date required</span>
+                <span style="margin-left:25px">*Date format: mm-dd-yyyy </span>
+                <span style="margin-left:25px"> *Units: kg or lbs(default)</span>
+                <span style="margin-left:25px">*Default reps and weight = 0</span>
+            </p>
+        </div>
+    </fieldset>
+</form>
+
+<script>
+    function editButton(id) {
+        var req = new XMLHttpRequest();//initiate new XML request
+        var info = { name: null, reps: null, weight: null, date: null, unit: null, id: null };
+
+        info.name = document.getElementById('nameB').value;//set value of name
+
+        info.reps = document.getElementById('repsB').value;//sets value of reps
+
+        info.weight = document.getElementById('weightB').value;//sets value of weight
+
+        info.date = document.getElementById('dateB').value;//sets value of date
+
+        var mmddyyyy = info.date;//pull date for temp variable
+        var day = mmddyyyy.substring(3, 5);//pulls day
+        var month = mmddyyyy.substring(0, 2);//pulls month
+        var year = mmddyyyy.substring(6, 10);//pull year
+        console.log(year + "-" + month + "-" + day);
+        var yyyymmdd = year + "-" + month + "-" + day//restructures date
+        info.date = yyyymmdd;//sets date to restructured date
+
+
+        info.id = id;//sets id
+
+        if (document.getElementById('unitB').value != 'lbs' && document.getElementById('unitB').value != 'kg') {//checks if value is not lbs or kg
+            info.unit = 'lbs';//default unit
+        }
+        else {
+            info.unit = document.getElementById('unitB').value;//sets unit value
+        }
+
+        var payload = "/updateRow?name=" + info.name + "&reps=" + info.reps + "&weight=" + info.weight + "&date=" + info.date + "&unit=" + info.unit + "&id=" + info.id;//create payload for req
+
+        req.open('GET', payload, true);//opens location
+        req.send();//sends request
+
+        req.onreadystatechange = function () {//runs on state change
+            if (req.readyState === XMLHttpRequest.DONE && req.status >= 200 && req.status < 300) {
+                window.open("http://flip3.engr.oregonstate.edu:49913/", "_self");//opens main page
+            }
+        }
+
+    }
+</script>
